@@ -16,8 +16,7 @@ jobs:
           command: npm run build
       - run:
           name: Deploy Firebase Hosting
-          command: |
-              firebase deploy --token $FIREBASE_CI_TOKEN --project $PROD_PROJECT_ID
+          command: firebase deploy --token $FIREBASE_CI_TOKEN --project $PROD_PROJECT_ID
 
   deploy_dev:
     docker:
@@ -35,12 +34,11 @@ jobs:
           command: npm run build
       - run:
           name: Deploy Firebase Hosting
-          command: |
-          firebase deploy --token $FIREBASE_CI_TOKEN --project $DEV_PROJECT_ID
-            
+          command: firebase deploy --token $FIREBASE_CI_TOKEN --project $DEV_PROJECT_ID
+
 workflows:
   version: 2
-  deploy_dev: # ワークフローの名前
+  build_and_deploy: # ワークフローの名前
     jobs:
       - deploy_dev: # 上で定義したジョブを指定します
           filters:
