@@ -1,67 +1,6 @@
-# version: 2.1
-# commands:
-#   install-awscli:
-#     steps:
-#       - run:
-#           name: install awscli
-#           command: |
-#             sudo pip install awscli
-
-#   app-deploy:
-#     steps:
-#       - run:
-#           name: deploy
-#           command: |
-
-#             export APP_NAME=fors-nissin
-#             export MODULE_NAME=aie-iot-fw
-
-#             export S3BUCKET_NAME="fors-codedeploy-artifacts-${AWS_ENV_NAME}"
-#             export ARTIFACT_NAME="${APP_NAME}-${MODULE_NAME}-${CIRCLE_BRANCH}-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"
-#             export ARTIFACT_KEY="${APP_NAME}/${MODULE_NAME}/${ARTIFACT_NAME}.zip"
-#             export S3LOCATION="s3://${S3BUCKET_NAME}/${ARTIFACT_KEY}"
-
-#             echo ${ARTIFACT_NAME} > rev-info
-#             aws --region ap-northeast-1 deploy push --application-name ${APP_NAME} --s3-location ${S3LOCATION} --source .
-#             aws --region ap-northeast-1 deploy create-deployment --application-name ${APP_NAME} --s3-location bucket=${S3BUCKET_NAME},key=${ARTIFACT_KEY},bundleType=zip --deployment-group-name ${CIRCLE_BRANCH} --deployment-config-name CodeDeployDefault.AllAtOnce
-
-# jobs:
-#   deploy-to-dev:
-#     docker:
-#       - image: circleci/python:3.7.3
-#     steps:
-#       - install-awscli
-#       - checkout
-#       - app-deploy
-#   deploy-to-prod:
-#     docker:
-#       - image: circleci/python:3.7.3
-#     steps:
-#       - install-awscli
-#       - checkout
-#       - app-deploy
-
-# workflows:
-#   version: 2
-#   build_and_deploy:
-#     jobs:
-#       - deploy-to-dev:
-#           context: aws-dev
-#           filters:
-#             branches:
-#               only:
-#                 - dev
-#       - deploy-to-prod:
-#           context: aws-prod
-#           filters:
-#             branches:
-#               only:
-#                 - master
-
-
 version: 2
 jobs:
-  build:
+  deploy_master:
     docker:
       - image: circleci/node:latest
 
@@ -84,3 +23,34 @@ jobs:
           name: Deploy Firebase Hosting
           command: |
               firebase deploy --token $FIREBASE_CI_TOKEN --project $PROD_PROJECT_ID
+
+workflows:
+  version: 2
+  deploy_dev: # ワークフローの名前
+    jobs:
+      - deploy_dev: # 上で定義したジョブを指定します
+          filters:
+            branches:
+              only: develop # developブランチのみを実行対象とします
+      - deploy_master:
+          filters:
+            branches:
+              only: master # masterブランチのみを実行対象とします
+    
+
+# workflows:
+#   version: 2
+#   build_and_deploy:
+#     jobs:
+#       - deploy-to-dev:
+#           context: aws-dev
+#           filters:
+#             branches:
+#               only:
+#                 - dev
+#       - deploy-to-prod:
+#           context: aws-prod
+#           filters:
+#             branches:
+#               only:
+#                 - master
