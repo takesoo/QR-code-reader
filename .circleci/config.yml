@@ -75,13 +75,6 @@ jobs:
           command: sudo npm install -g firebase-tools
 
       - run:
-          name: Log in firebase
-          command: firebase login
-
-      - run:
           name: Deploy Firebase Hosting
           command: |
-              echo $GOOGLE_APPLICATION_CREDENTIALS
-              echo $PROD_API_KEY
-              echo $PROD_PROJECT_ID
-              firebase deploy --only hosting --project $PROD_PROJECT_ID
+              firebase deploy --token $FIREBASE_CI_TOKEN --project $PROD_PROJECT_ID
