@@ -74,16 +74,18 @@ jobs:
           name: Install firebase-tools
           command: sudo npm install -g firebase-tools
 
-      - run:
-          name: Decode API_KEY file
-          command: echo $PROD_API_KEY
+      # - run:
+      #     name: Decode API_KEY file
+      #     command: echo $PROD_API_KEY
 
-      - run:
-          name: Setup local environment
-          command: echo "export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/account-auth-develop.json" >> $BASH_ENV
+      # - run:
+      #     name: Setup local environment
+      #     command: echo "export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/account-auth-develop.json" >> $BASH_ENV
 
       - run:
           name: Deploy Firebase Hosting
           command: |
               echo $GOOGLE_APPLICATION_CREDENTIALS
-              firebase deploy --only hosting --project $FIREBASE_PROJECT_ID
+              echo $PROD_API_KEY
+              echo $PROD_PROJECT_ID
+              firebase deploy --only hosting --project $PROD_PROJECT_ID
