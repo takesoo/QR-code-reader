@@ -1,7 +1,7 @@
 {
-  "name": "test",
+  "name": "QR_code_reader",
   "version": "1.0.0",
-  "description": "My unreal Nuxt.js project",
+  "description": "My groovy Nuxt.js project",
   "author": "hotaka",
   "private": true,
   "scripts": {
@@ -11,10 +11,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@nuxtjs/dotenv": "^1.4.0"
+    "firebase": "^7.14.3",
+    "firebase-tools": "^8.2.0",
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"
