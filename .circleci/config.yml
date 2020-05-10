@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Deploy Firebase Hosting
           command: |
-              firebase deploy --only hosting:qr-code-reader-dev --token $FIREBASE_CI_TOKEN --project $PROD_PROJECT_ID
+          firebase deploy --token $FIREBASE_CI_TOKEN --project $DEV_PROJECT_ID
             
 workflows:
   version: 2
