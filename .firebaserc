@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "qr-code-reader-cf3cf"
+    "default": "qr-code-reader-cf3cf",
+    "qr-code-reader-develop": "qr-code-reader-develop"
   }
 }
