@@ -69,8 +69,12 @@ jobs:
       - checkout
 
       - run:
-          name: npm install
-          command: npm install
+          name: npm install firebase-tools
+          command: npm install firebase-tools
+
+      - run:
+          name: npm install nuxt
+          command: npm install nuxt
 
       - run:
           name: build project
