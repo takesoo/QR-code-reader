@@ -1,7 +1,7 @@
 {
-  "name": "test",
+  "name": "QR_code_reader",
   "version": "1.0.0",
-  "description": "My unreal Nuxt.js project",
+  "description": "My groovy Nuxt.js project",
   "author": "hotaka",
   "private": true,
   "scripts": {

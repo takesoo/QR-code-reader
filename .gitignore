@@ -88,6 +88,3 @@ sw.*
 
 # Vim swap files
 *.swp
-
-# firebaseCI用アカウントキー
-account-auth-develop.json
