@@ -76,10 +76,7 @@ jobs:
 
       - run:
           name: Decode API_KEY file
-          command:
-            echo $PROD_API_KEY | base64 -d
-            echo "export PROD_API_KEY=$PROD_API_KEY"
-            echo PROD_API_KEY
+          command: echo $PROD_API_KEY
 
       - run:
           name: Setup local environment
